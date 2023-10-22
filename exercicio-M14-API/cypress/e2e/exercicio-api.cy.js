@@ -6,6 +6,7 @@ describe('Testes da Funcionalidade Usuários', () => {
         cy.request('usuarios').then(response => {
             return contrato.validateAsync(response.body) 
         });
+        
     });
 
     it('Deve listar usuários cadastrados', () => {
