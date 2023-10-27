@@ -8,40 +8,13 @@ pipeline {
             }
         }
 
-        stage('Acessar pasta') {
-            steps {
-                bat "cd exercicio-M14-API"
-            }
-        }
-
-        stage('Instalar dependências') {
+        stage('Instalar dependências e Executar testes') {
             steps {
                 dir('exercicio-M12-e2e') {
-                  bat 'npm install'
+                    bat 'npm install'
+                    bat 'npx cypress run'
                 }
             }
         }
-        
-        stage('Instalar servidor') {
-            steps {
-                bat 'npm install -g serverest --force'
-            }
-        }
-        
-        stage('Subir servidor') {
-            steps {
-                dir('exercicio-M12-e2e') {
-                bat 'start cmd /k "npx serverest && npm run cy:run'
-               }
-            }
-        }
-
-    stage('Realizar os testes') {
-      steps {
-          dir('exercicio-M12-e2e') {
-        bat 'npm run cy:run'
-          }
-      }
     }
-  }
 }

@@ -1,0 +1,19 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Clonar o repositório') {
+            steps {
+                git branch: 'main', url: 'https://github.com/RaphaelLimaSouza/exercicio-ebac-M15.git'
+            }
+        }
+stage('Instalar dependências e Executar testes') {
+            steps {
+                dir('exercicio-M14-API') {
+                    bat 'npm install -g serverest --force' //forçar o install junto com install do serverest
+                    bat 'start cmd /k "npx serverest && npm run cy:run' // iniciar um novo cmd porque o anterior ficou com o serverest nele e executar os testes
+                }
+            }
+        }
+    }
+}
